@@ -126,17 +126,17 @@ app.put('/api/services/:id', async (req, res) => {
 // 4. Delete a service by ID (DELETE)
 app.delete('/api/services/:id', async (req, res) => {
     try {
-        const service = await Service.findById(req.params.id);
+        const service = await Service.findByIdAndDelete(req.params.id);
         if (!service) {
             return res.status(404).json({ message: 'Service not found' });
         }
 
-        await service.remove();
         res.json({ message: 'Service deleted' });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
+
 
 const PORT = 5000;
 
